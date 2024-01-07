@@ -3,7 +3,6 @@ import { Inject } from "typescript-ioc";
 
 import { BaseService } from "./base/BaseService";
 import { ApplicationCommandManager } from "./services/ApplicationCommandManager";
-import { BlobGameService } from "./services/BlobGameService";
 import { CardOfTheDayService } from "./services/CardOfTheDayService";
 import { CardService } from "./services/CardService";
 import { CommandParser } from "./services/CommandParser";
@@ -11,8 +10,6 @@ import { EmojiService } from "./services/EmojiService";
 import { EnvService } from "./services/EnvService";
 import { GuildConfigurationService } from "./services/GuildConfigurationService";
 import { LoggerService } from "./services/LoggerService";
-import { MassMultiplayerEventService } from "./services/MassMultiplayerEventService";
-import { NewsService } from "./services/NewsService";
 import { PresenceService } from "./services/PresenceService";
 import { RulesService } from "./services/RulesService";
 import { nameOfConstructor } from "./utils";
@@ -26,17 +23,14 @@ export class Bot {
   private client!: Discord.Client;
   private commandPrefix!: string;
 
-  @Inject private blobGameService!: BlobGameService;
   @Inject private cardOfTheDayService!: CardOfTheDayService;
   @Inject private cardService!: CardService;
   @Inject private envService!: EnvService;
   @Inject private emojiService!: EmojiService;
   @Inject private guildConfigurationService!: GuildConfigurationService;
   @Inject private logger!: LoggerService;
-  @Inject private newsService!: NewsService;
   @Inject private presenceService!: PresenceService;
   @Inject private rulesService!: RulesService;
-  @Inject private massMultiplayerEventService!: MassMultiplayerEventService;
   @Inject private commandParser!: CommandParser;
   @Inject private applicationCommandManager!: ApplicationCommandManager;
 
@@ -72,17 +66,13 @@ export class Bot {
       this.emojiService,
       this.cardService,
       this.cardOfTheDayService,
-      this.newsService,
       this.rulesService,
-      this.massMultiplayerEventService,
-      this.blobGameService,
       this.commandParser,
       this.applicationCommandManager,
     ];
 
     this.needShutdownServices = [
       this.cardOfTheDayService,
-      this.newsService,
       this.presenceService,
     ];
 
