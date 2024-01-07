@@ -1,7 +1,7 @@
 import {
   CommandInteraction,
   SelectMenuInteraction,
-  SlashCommandBuilder,
+  SlashCommandBuilder
 } from "discord.js";
 import { Inject } from "typescript-ioc";
 
@@ -40,6 +40,8 @@ export class CardCommand implements IApplicationCommand {
 
   commandAccess = ApplicationCommandAccess.GLOBAL;
 
+
+
   commandData = new SlashCommandBuilder()
     .setName("c")
     .setDescription(`Pour l'affichage de carte(s)`)
@@ -73,18 +75,17 @@ export class CardCommand implements IApplicationCommand {
     );
 
   async execute(
-    commandInteraction: CommandInteraction
+    interaction: CommandInteraction
   ): Promise<IApplicationCommandResult> {
-    if (!commandInteraction.isChatInputCommand()) {
-      await commandInteraction.reply("Oups, y'a eu un problème");
+    if (!interaction.isChatInputCommand()) {
+      await interaction.reply("Oups, y'a eu un problème");
       return { cmd: "CardCommand", result: "Interaction hors chat" };
     }
-
-    const search = commandInteraction.options.getString("recherche");
-    const extended = commandInteraction.options.getBoolean("complet") || false;
-    const back = commandInteraction.options.getBoolean("dos") || false;
+    const search = interaction.options.getString("recherche");
+    const extended = interaction.options.getBoolean("complet") || false;
+    const back = interaction.options.getBoolean("dos") || false;
     const ephemeral =
-      commandInteraction.options.getBoolean("ephemere") || false;
+    interaction.options.getBoolean("ephemere") || false;
 
     if (search) {
       const searchOptions: SearchOptions = {
@@ -106,19 +107,19 @@ export class CardCommand implements IApplicationCommand {
       if (foundCards.length > 0) {
         if (foundCards.length === 1) {
           return this.sendCard(
-            commandInteraction,
+            interaction,
             foundCards[0],
             searchOptions
           );
         } else {
           return this.sendCardChoices(
-            commandInteraction,
+            interaction,
             foundCards,
             searchOptions
           );
         }
       } else {
-        await commandInteraction.reply(
+        await interaction.reply(
           "Désolé, le mystère de cette carte reste entier."
         );
         return {

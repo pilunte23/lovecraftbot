@@ -84,7 +84,7 @@ export class CardOfTheDayService extends BaseService {
           }
         });
       }
-    }, 1000 * 60);
+    }, 1000 * 60 * 60);
   }
 
   /**
