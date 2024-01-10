@@ -27,7 +27,7 @@ export class CardOfTheDayService extends BaseService {
   private cardCodesSent!: GuildResource<string[]>;
 
   /** Timer permettant de gérer la routine d'envoi de carte */
-  private timer: NodeJS.Timer | undefined = undefined;
+  private timer: NodeJS.Timeout | undefined = undefined;
 
   @Inject private cardService!: CardService;
   @Inject private logger!: LoggerService;

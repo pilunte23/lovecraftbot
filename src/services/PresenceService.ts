@@ -29,7 +29,7 @@ export class PresenceService extends BaseService {
   @Inject private randomService!: RandomService;
 
   /** Timer permettant de gérer la routine d'envoi de carte */
-  private timer: NodeJS.Timer | undefined = undefined;
+  private timer: NodeJS.Timeout | undefined = undefined;
 
   public async init(client: Discord.Client): Promise<void> {
     await super.init(client);
